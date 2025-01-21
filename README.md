@@ -1,7 +1,6 @@
 # Digital Art Space App 🎨📱
 ### Unit-2 Pathway-3 of Android Basics with Compose
 
-Showcase your creativity with the **Digital Art Space App**, a user-friendly Android application built using Jetpack Compose. This app allows you to display your artwork, family photos, or other digital creations in a sleek and modern interface.
 
 ## 🌟 Features
 
@@ -38,10 +37,7 @@ Showcase your creativity with the **Digital Art Space App**, a user-friendly And
 - Customizing UI elements using the `Modifier` object.
 - Managing states with Jetpack Compose and responding to user interactions.
 
-## ⚠️ Disclaimer
 
-- Use only assets that you own or have proper rights to include in the app.
-- This app is designed for learning and showcasing purposes.
 
 ## 📂 Project Structure
 
@@ -60,16 +56,5 @@ Showcase your creativity with the **Digital Art Space App**, a user-friendly And
 └── build.gradle
 ```
 
-## 💡 Future Enhancements
-
-- Add animations for artwork transitions.
-- Support for uploading photos from device storage.
-- Implement a grid view for displaying multiple photos at once.
-- Add theme customization options.
-
-## 🏆 Contributing
-
-Contributions are welcome! Feel free to fork this repository, open an issue, or submit a pull request.
 
 
-Let me know if you'd like help tailoring this further! 😊
