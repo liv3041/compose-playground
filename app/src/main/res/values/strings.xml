@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Compose Playground</string>
+    <string name="affirmation1">I am capable of achieving greatness through my unique talents and determination.</string>
+    <string name="affirmation2">Each challenge I face is an opportunity to grow stronger and wiser.</string>
+    <string name="affirmation3">I embrace my journey, knowing every step leads to my purpose.</string>
+    <string name="affirmation4">I radiate positivity, kindness, and confidence in all that I do.</string>
+    <string name="affirmation5">My potential is limitless, and I create my future with intention.</string>
+    <string name="affirmation6">I am surrounded by opportunities that align with my highest good.</string>
+    <string name="affirmation7">I trust myself to make decisions that nurture my happiness and success.</string>
+    <string name="affirmation8">Every day, I am becoming the best version of myself.</string>
+    <string name="affirmation9">I am grateful for my progress and celebrate my small victories.</string>
+    <string name="affirmation10">I attract love, joy, and abundance effortlessly into my life.</string>
 </resources>
