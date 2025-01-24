@@ -10,4 +10,5 @@
     <string name="affirmation8">Every day, I am becoming the best version of myself.</string>
     <string name="affirmation9">I am grateful for my progress and celebrate my small victories.</string>
     <string name="affirmation10">I attract love, joy, and abundance effortlessly into my life.</string>
+    <string name="title_activity_affirmations">AffirmationsActivity</string>
 </resources>
