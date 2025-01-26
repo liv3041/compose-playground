@@ -1,6 +1,4 @@
 # Digital Art Space App 🎨📱
-### Unit-2 Pathway-3 of Android Basics with Compose
-
 
 ## 🌟 Features
 
@@ -15,6 +13,21 @@
 - **Kotlin**: The programming language for building the app.
 - **Jetpack Compose**: Used for building modern, reactive UI.
 - **Android Studio**: The development environment.
+
+### Dependencies
+
+Ensure the following dependencies are included in your `build.gradle` (app-level):
+
+```gradle
+dependencies {
+    implementation "androidx.compose.ui:ui:1.3.0"
+    implementation "androidx.compose.material:material:1.3.0"
+    implementation "androidx.compose.ui:ui-tooling-preview:1.3.0"
+    implementation "androidx.navigation:navigation-compose:2.5.0"
+    implementation "androidx.compose.foundation:foundation:1.3.0"
+    implementation "androidx.compose.foundation:foundation-layout:1.3.0"
+}
+```
 
 ## 🚀 How to Use
 
@@ -55,6 +68,11 @@
 │   └── build.gradle
 └── build.gradle
 ```
+## Resources
+
+All the resources, including the code and layout designs, are taken from the **Android Developer Training Codelab**.
+
+- [Jetpack Compose Basics](https://developer.android.com/courses/pathways/compose)
 
 
 
