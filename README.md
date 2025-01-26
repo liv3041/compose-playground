@@ -42,8 +42,8 @@ dependencies {
 ### Screenshots
 
 - **List View**: Displays a simple vertical list of affirmations.
-<img src="https://github.com/user-attachments/assets/7c941d1e-be08-4b00-b1f3-fcb36710c35c" width="250">
 - **Grid View**: Shows affirmations in a grid layout.
+<img src="https://github.com/user-attachments/assets/7c941d1e-be08-4b00-b1f3-fcb36710c35c" width="250">
 <img src="https://github.com/user-attachments/assets/d6f89534-bf02-4aef-b780-dce6363391a1" width="250">
 
 
