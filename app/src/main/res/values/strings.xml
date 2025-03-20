@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Compose Playground</string>
+    <string name="art_space">Art Space</string>
+    <string name="affirmations">Affirmations</string>
 </resources>
