@@ -1,5 +1,6 @@
 package com.toonandtools.composeplayground
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -22,11 +23,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.compose.rememberNavController
 import com.toonandtools.composeplayground.data.AppsData
 import com.toonandtools.composeplayground.data.appItems
 import com.toonandtools.composeplayground.ui.theme.ComposePlaygroundTheme
@@ -38,6 +41,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             ComposePlaygroundTheme {
 //                Scaffold(modifier = Modifier.fillMaxSize()) {
+                ComposePlaygroundApp()
 //
 //                }
             }
@@ -82,7 +86,13 @@ class MainActivity : ComponentActivity() {
                 modifier = Modifier
                     .padding(16.dp)
                     .clickable {
-                        // Navigate to the next screen when card is clicked
+//                        val context = LocalContext.current
+                        val intent = when (app.title) {
+                            R.string.art_space -> Intent(this@MainActivity, ArtSpace::class.java)
+                            R.string.affirmations -> Intent(this@MainActivity, AffirmationsActivity::class.java)
+                            else -> Intent(this@MainActivity, MainActivity::class.java) // Default fallback
+                        }
+                        this@MainActivity.startActivity(intent)
                     }
             ) {
                 Image(
@@ -100,6 +110,7 @@ class MainActivity : ComponentActivity() {
 
 
         }
-    }
+        }
+
 }
 
