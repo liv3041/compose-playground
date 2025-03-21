@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Compose Playground</string>
+
     <string name="affirmation1">I am capable of achieving greatness through my unique talents and determination.</string>
     <string name="affirmation2">Each challenge I face is an opportunity to grow stronger and wiser.</string>
     <string name="affirmation3">I embrace my journey, knowing every step leads to my purpose.</string>
@@ -26,4 +27,8 @@
     <string name="painting">Painting</string>
     <string name="photography">Photography</string>
     <string name="tech">Tech</string>
+
+    <string name="art_space">Art Space</string>
+    <string name="affirmations">Affirmations</string>
+
 </resources>
