@@ -1,7 +1,9 @@
 package com.toonandtools.composeplayground
 
+import android.app.Activity
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.LocalActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
@@ -28,6 +30,8 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -69,6 +73,8 @@ class AffirmationsActivity : ComponentActivity() {
 @Composable
 private fun App(){
     var isListVisible by remember { mutableStateOf(true) }
+    val activity = LocalActivity.current as Activity
+
 
     Column(
         modifier = Modifier
@@ -83,11 +89,20 @@ private fun App(){
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.fillMaxWidth()
+
         ) {
+            Icon(
+                imageVector = Icons.Default.ArrowBack,
+                contentDescription = "Back",
+                modifier = Modifier.padding(4.dp)
+//                    .align(Alignment.Start)
+                    .clickable{
+                        (activity as? Activity)?.finish()               }
+            )
             Text(
                 text = if(isListVisible) "List View" else "Grid View",
                 style =  MaterialTheme.typography.headlineLarge,
-                modifier = Modifier.padding(8.dp)
+                modifier = Modifier.padding(4.dp)
                     .clickable {
                     // Change the state of the switch when the text is clicked
                     isListVisible= !isListVisible
