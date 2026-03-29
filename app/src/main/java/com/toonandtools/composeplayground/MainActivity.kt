@@ -33,6 +33,7 @@ import androidx.navigation.compose.rememberNavController
 import com.toonandtools.composeplayground.data.AppsData
 import com.toonandtools.composeplayground.data.appItems
 import com.toonandtools.composeplayground.ui.theme.ComposePlaygroundTheme
+import kotlin.jvm.java
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

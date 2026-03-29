@@ -34,9 +34,7 @@
 
         <activity
             android:name=".ArtSpace"
-
             android:exported="true"
-            android:label="@string/title_activity_art_space"
             android:theme="@style/Theme.ComposePlayground" >
 
 
