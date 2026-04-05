@@ -81,7 +81,8 @@ fun SpaceCreation(navController: NavController) {
            modifier = Modifier.padding(16.dp)
                .align(Alignment.Start)
                .clickable{
-                   (activity as? Activity)?.finish()               }
+                   navController.popBackStack()
+               }
        )
        Image(painter = painterResource(data[currentIndex].third),
            contentDescription = "${data[currentIndex].first} + Image" ,

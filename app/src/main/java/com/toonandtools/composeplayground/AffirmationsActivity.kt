@@ -99,7 +99,7 @@ fun App(navController: NavController){
                 modifier = Modifier.padding(4.dp)
 //                    .align(Alignment.Start)
                     .clickable{
-                        (activity as? Activity)?.finish()               }
+                        navController.popBackStack()               }
             )
             Text(
                 text = if(isListVisible) "List View" else "Grid View",

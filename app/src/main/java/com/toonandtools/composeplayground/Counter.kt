@@ -67,7 +67,7 @@ fun CounterApp(navController: NavController) {
                 .align(Alignment.TopStart)
                 .padding(16.dp)
                 .clickable {
-                    activity?.finish()
+                   navController.popBackStack()
                 }
         )
 
