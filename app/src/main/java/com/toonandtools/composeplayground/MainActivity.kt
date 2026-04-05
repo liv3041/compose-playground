@@ -26,6 +26,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.modifier.modifierLocalConsumer
@@ -39,10 +41,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.toonandtools.composeplayground.data.AppsData
 import com.toonandtools.composeplayground.data.appItems
+import com.toonandtools.composeplayground.navigation.Screen
 import com.toonandtools.composeplayground.ui.theme.ComposePlaygroundTheme
+import com.toonandtools.composeplayground.viewmodel.MainViewModel
 import kotlin.jvm.java
 
 class MainActivity : ComponentActivity() {
@@ -51,24 +58,54 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             ComposePlaygroundTheme {
+                val navController = rememberNavController()
+
+                NavHost(
+                    navController = navController,
+                    startDestination = Screen.Home.route
+                ) {
+
+                    composable(Screen.Home.route) {
+                        ComposePlaygroundApp(navController = navController)
+                    }
+
+                    composable(Screen.ArtSpace.route) {
+                       SpaceCreation(navController)
+                    }
+
+                    composable(Screen.Affirmations.route) {
+                        App(navController)
+                    }
+
+                    composable(Screen.Counter.route) {
+                        CounterApp(navController)
+                    }
+
+                    composable(Screen.ApiSimulator.route) {
+                        ApiSimulatorApp(navController)
+                    }
+                }
                 Scaffold(modifier = Modifier.fillMaxSize()) {contentPadding ->
-                ComposePlaygroundApp(contentPadding)
+                ComposePlaygroundApp(contentPadding,navController)
                 }
             }
         }
     }
+//
+//    @Preview
+//    @Composable
+//    private fun ComposePlayground() {
+//        ComposePlaygroundApp()
+//    }
 
-    @Preview
     @Composable
-    private fun ComposePlayground() {
-        ComposePlaygroundApp()
-    }
-
-    @Composable
-    fun ComposePlaygroundApp(contentPadding: PaddingValues = PaddingValues(0.dp)) {
+    fun ComposePlaygroundApp(contentPadding: PaddingValues = PaddingValues(0.dp),navController: NavController) {
         val poppinsFamily = FontFamily(
             Font(R.font.poppins, FontWeight.Normal)
         )
+        val viewModel = MainViewModel()
+        val apps by viewModel.apps.collectAsState()
+
         Column(
             horizontalAlignment = Alignment.Start,
             modifier = Modifier
@@ -92,10 +129,14 @@ class MainActivity : ComponentActivity() {
                     .fillMaxSize()
                     .padding(8.dp)
             ) {
-                items(appItems) { app ->
+                items(apps) { app ->
                     ComposePlaygroundItem(
                         app = app,
-                        modifier = Modifier.padding(dimensionResource(R.dimen.padding_small))
+                        modifier = Modifier.padding(dimensionResource(R.dimen.padding_small)),
+                        onClick = {
+                            navController.navigate(getRoute(app))
+                        }
+
                     )
                 }
             }
@@ -105,11 +146,22 @@ class MainActivity : ComponentActivity() {
 
     }
 
+    fun getRoute(app: AppsData): String {
+        return when (app.title) {
+            R.string.art_space -> Screen.ArtSpace.route
+            R.string.affirmations -> Screen.Affirmations.route
+            R.string.counter -> Screen.Counter.route
+            R.string.api_simulator -> Screen.ApiSimulator.route
+            else -> Screen.Home.route
+        }
+    }
+
 
     @Composable
     fun ComposePlaygroundItem(
         app: AppsData,
-        modifier: Modifier = Modifier
+        modifier: Modifier = Modifier,
+        onClick: () -> Unit
     ) {
         Column(
             verticalArrangement = Arrangement.Center,
@@ -122,30 +174,7 @@ class MainActivity : ComponentActivity() {
                     .fillMaxWidth()
                     .aspectRatio(1f)
                     .clickable {
-//                        val context = LocalContext.current
-                        val intent = when (app.title) {
-                            R.string.art_space -> Intent(this@MainActivity, ArtSpace::class.java)
-                            R.string.affirmations -> Intent(
-                                this@MainActivity,
-                                AffirmationsActivity::class.java
-                            )
-
-                            R.string.counter -> Intent(
-                                this@MainActivity,
-                                Counter::class.java
-                            )
-
-                            R.string.api_simulator -> Intent(
-                                this@MainActivity,
-                                ApiSimulator::class.java
-                            )
-
-                            else -> Intent(
-                                this@MainActivity,
-                                MainActivity::class.java
-                            ) // Default fallback
-                        }
-                        this@MainActivity.startActivity(intent)
+                        onClick()
                     }
             ) {
                 Column(

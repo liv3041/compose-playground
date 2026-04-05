@@ -28,6 +28,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.toonandtools.composeplayground.ui.theme.ComposePlaygroundTheme
 import com.toonandtools.composeplayground.uistate.ApiSimulatorUiState
 import com.toonandtools.composeplayground.viewmodel.ApiSimulatorViewModel
@@ -38,16 +40,15 @@ class ApiSimulator: ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             ComposePlaygroundTheme {
-                ApiSimulatorApp()
+                val navController = rememberNavController()
+                ApiSimulatorApp(navController = navController)
             }
         }
     }
 }
 
 @Composable
-fun ApiSimulatorApp() {
-
-    val activity = LocalActivity.current
+fun ApiSimulatorApp(navController: NavController) {
     val viewModel: ApiSimulatorViewModel = viewModel()
     val uiState by viewModel.state.collectAsState()
     val state = uiState
@@ -69,7 +70,7 @@ fun ApiSimulatorApp() {
                 .align(Alignment.TopStart)
                 .padding(16.dp)
                 .clickable {
-                    activity?.finish()
+                    navController.popBackStack()
                 }
         )
 
@@ -119,8 +120,7 @@ fun ApiSimulatorApp() {
 @Composable
 private fun ApiSimulatorPreview() {
     ComposePlaygroundTheme {
-        ApiSimulatorApp()
-
+        val navController = rememberNavController()
+        ApiSimulatorApp(navController = navController)
     }
-
 }

@@ -35,6 +35,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat.startActivity
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.toonandtools.composeplayground.ui.theme.ComposePlaygroundTheme
 
 class ArtSpace : ComponentActivity() {
@@ -43,7 +45,8 @@ class ArtSpace : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             ComposePlaygroundTheme {
-                    SpaceCreation()
+                val navController = rememberNavController()
+                SpaceCreation(navController = navController)
             }
         }
     }
@@ -51,7 +54,7 @@ class ArtSpace : ComponentActivity() {
 
 
 @Composable
-fun SpaceCreation( ) {
+fun SpaceCreation(navController: NavController) {
 
     val data = listOf(
         Triple("Floating Balloon in the Sky","Bubbly Balloon", R.drawable.hot_air_balloon),
@@ -78,7 +81,8 @@ fun SpaceCreation( ) {
            modifier = Modifier.padding(16.dp)
                .align(Alignment.Start)
                .clickable{
-                   (activity as? Activity)?.finish()               }
+                   navController.popBackStack()
+               }
        )
        Image(painter = painterResource(data[currentIndex].third),
            contentDescription = "${data[currentIndex].first} + Image" ,
@@ -120,6 +124,6 @@ fun SpaceCreation( ) {
 @Composable
 fun ArtSpacePreview() {
     ComposePlaygroundTheme {
-      SpaceCreation()
+      SpaceCreation(navController = rememberNavController())
     }
 }

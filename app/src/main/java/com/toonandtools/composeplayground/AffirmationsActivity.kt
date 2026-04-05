@@ -53,6 +53,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.toonandtools.composeplayground.model.Affirmation
 import com.toonandtools.composeplayground.model.DataSource
 import com.toonandtools.composeplayground.model.Topic
@@ -64,14 +66,14 @@ class AffirmationsActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             ComposePlaygroundTheme {
-                App()
+                App(navController = rememberNavController())
             }
         }
     }
 }
 
 @Composable
-private fun App(){
+fun App(navController: NavController){
     var isListVisible by remember { mutableStateOf(true) }
     val activity = LocalActivity.current as Activity
 
@@ -97,7 +99,7 @@ private fun App(){
                 modifier = Modifier.padding(4.dp)
 //                    .align(Alignment.Start)
                     .clickable{
-                        (activity as? Activity)?.finish()               }
+                        navController.popBackStack()               }
             )
             Text(
                 text = if(isListVisible) "List View" else "Grid View",
@@ -283,6 +285,6 @@ fun TopicGrid(topicList: List<Topic>,modifier: Modifier = Modifier) {
 fun AffirmationAppPreview() {
     ComposePlaygroundTheme {
 
-        App()
+        App(navController = rememberNavController())
     }
 }
