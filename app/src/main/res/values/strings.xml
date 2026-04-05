@@ -31,5 +31,6 @@
     <string name="art_space">Art Space</string>
     <string name="affirmations">Affirmations</string>
     <string name="counter">Counter</string>
+    <string name="api_simulator">Api Simulator\n</string>
 
 </resources>

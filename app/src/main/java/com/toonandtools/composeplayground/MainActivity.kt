@@ -12,10 +12,12 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -117,6 +119,8 @@ class MainActivity : ComponentActivity() {
             Card(
                 modifier = Modifier
                     .padding(16.dp)
+                    .fillMaxWidth()
+                    .aspectRatio(1f)
                     .clickable {
 //                        val context = LocalContext.current
                         val intent = when (app.title) {
@@ -131,6 +135,11 @@ class MainActivity : ComponentActivity() {
                                 Counter::class.java
                             )
 
+                            R.string.api_simulator -> Intent(
+                                this@MainActivity,
+                                ApiSimulator::class.java
+                            )
+
                             else -> Intent(
                                 this@MainActivity,
                                 MainActivity::class.java
@@ -139,18 +148,24 @@ class MainActivity : ComponentActivity() {
                         this@MainActivity.startActivity(intent)
                     }
             ) {
-                Image(
-                    painter = painterResource(app.image),
-                    contentDescription = stringResource(app.title),
-                    modifier = Modifier.padding(16.dp)
-                )
-                Spacer(modifier = Modifier.height(6.dp))
-                Text(
-                    text = stringResource(app.title),
-                    style = MaterialTheme.typography.labelMedium,
-                    modifier = Modifier.align(Alignment.CenterHorizontally)
-                        .padding(bottom = 16.dp)
-                )
+                Column(
+                    modifier = Modifier.fillMaxSize(),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    Image(
+                        painter = painterResource(app.image),
+                        contentDescription = stringResource(app.title),
+                        modifier = Modifier.size(80.dp)
+                    )
+
+                    Spacer(modifier = Modifier.height(8.dp))
+
+                    Text(
+                        text = stringResource(app.title),
+                        style = MaterialTheme.typography.labelMedium
+                    )
+                }
             }
 
 
