@@ -32,5 +32,6 @@
     <string name="affirmations">Affirmations</string>
     <string name="counter">Counter</string>
     <string name="api_simulator">Api Simulator\n</string>
+    <string name="user_flow">User Flow</string>
 
 </resources>

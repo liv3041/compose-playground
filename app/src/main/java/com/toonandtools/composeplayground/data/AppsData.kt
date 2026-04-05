@@ -14,6 +14,7 @@ data class AppsData(
         AppsData(R.string.art_space,R.drawable.art),
         AppsData(R.string.affirmations,R.drawable.affirmations),
         AppsData(R.string.counter,R.drawable.counter),
-        AppsData(R.string.api_simulator, R.drawable.api_simulator2)
+        AppsData(R.string.api_simulator, R.drawable.api_simulator2),
+        AppsData(R.string.user_flow, R.drawable.user)
     )
 
