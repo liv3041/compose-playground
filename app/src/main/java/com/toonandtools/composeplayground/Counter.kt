@@ -27,6 +27,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.toonandtools.composeplayground.ui.theme.ComposePlaygroundTheme
 import com.toonandtools.composeplayground.viewmodel.CounterViewModel
 
@@ -36,7 +38,8 @@ class Counter : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             ComposePlaygroundTheme {
-                CounterApp()
+                val navController = rememberNavController()
+                CounterApp(navController)
             }
         }
     }
@@ -44,7 +47,7 @@ class Counter : ComponentActivity() {
 
 
 @Composable
-fun CounterApp() {
+fun CounterApp(navController: NavController) {
 //    var count by rememberSaveable { mutableIntStateOf(0) }
     val activity = LocalActivity.current
     val viewModel: CounterViewModel = viewModel()
@@ -117,6 +120,6 @@ fun Counter(count: Int,
 @Composable
 private fun CounterAppPreview() {
     ComposePlaygroundTheme {
-        CounterApp()
+        CounterApp(navController = rememberNavController())
     }
 }
