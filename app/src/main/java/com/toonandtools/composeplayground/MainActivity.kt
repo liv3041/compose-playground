@@ -8,7 +8,9 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -19,16 +21,22 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.compose.rememberNavController
 import com.toonandtools.composeplayground.data.AppsData
 import com.toonandtools.composeplayground.data.appItems
@@ -41,10 +49,9 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             ComposePlaygroundTheme {
-//                Scaffold(modifier = Modifier.fillMaxSize()) {
-                ComposePlaygroundApp()
-//
-//                }
+                Scaffold(modifier = Modifier.fillMaxSize()) {contentPadding ->
+                ComposePlaygroundApp(contentPadding)
+                }
             }
         }
     }
@@ -56,18 +63,42 @@ class MainActivity : ComponentActivity() {
     }
 
     @Composable
-    fun ComposePlaygroundApp() {
-        LazyVerticalGrid(
-            columns = GridCells.Adaptive(minSize = 128.dp), // Each column will be at least 128.dp wide
-            modifier = Modifier.fillMaxSize()
-        ) {
-            items(appItems) { app ->
-                ComposePlaygroundItem(
-                    app = app,
-                    modifier = Modifier.padding(dimensionResource(R.dimen.padding_small))
-                )
+    fun ComposePlaygroundApp(contentPadding: PaddingValues = PaddingValues(0.dp)) {
+        val poppinsFamily = FontFamily(
+            Font(R.font.poppins, FontWeight.Normal)
+        )
+        Column(
+            horizontalAlignment = Alignment.Start,
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(dimensionResource(R.dimen.padding_small))
+                .padding(paddingValues = contentPadding)
+
+        ){
+            Text(
+                text = "Compose Playground",
+                modifier = Modifier.padding(start = 28.dp, top = 28.dp),
+                fontFamily = poppinsFamily,
+                fontSize = 18.sp
+            )
+
+
+
+            LazyVerticalGrid(
+                columns = GridCells.Adaptive(minSize = 128.dp), // Each column will be at least 128.dp wide
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(8.dp)
+            ) {
+                items(appItems) { app ->
+                    ComposePlaygroundItem(
+                        app = app,
+                        modifier = Modifier.padding(dimensionResource(R.dimen.padding_small))
+                    )
+                }
             }
         }
+
 
 
     }
@@ -90,8 +121,20 @@ class MainActivity : ComponentActivity() {
 //                        val context = LocalContext.current
                         val intent = when (app.title) {
                             R.string.art_space -> Intent(this@MainActivity, ArtSpace::class.java)
-                            R.string.affirmations -> Intent(this@MainActivity, AffirmationsActivity::class.java)
-                            else -> Intent(this@MainActivity, MainActivity::class.java) // Default fallback
+                            R.string.affirmations -> Intent(
+                                this@MainActivity,
+                                AffirmationsActivity::class.java
+                            )
+
+                            R.string.counter -> Intent(
+                                this@MainActivity,
+                                Counter::class.java
+                            )
+
+                            else -> Intent(
+                                this@MainActivity,
+                                MainActivity::class.java
+                            ) // Default fallback
                         }
                         this@MainActivity.startActivity(intent)
                     }
@@ -101,11 +144,12 @@ class MainActivity : ComponentActivity() {
                     contentDescription = stringResource(app.title),
                     modifier = Modifier.padding(16.dp)
                 )
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(6.dp))
                 Text(
                     text = stringResource(app.title),
                     style = MaterialTheme.typography.labelMedium,
                     modifier = Modifier.align(Alignment.CenterHorizontally)
+                        .padding(bottom = 16.dp)
                 )
             }
 
