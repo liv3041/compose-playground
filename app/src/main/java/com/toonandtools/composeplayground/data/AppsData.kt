@@ -11,7 +11,8 @@ data class AppsData(
     @DrawableRes val image: Int
 )
     val appItems = listOf(
-     AppsData(R.string.art_space,R.drawable.art),
-     AppsData(R.string.affirmations,R.drawable.affirmations)
+        AppsData(R.string.art_space,R.drawable.art),
+        AppsData(R.string.affirmations,R.drawable.affirmations),
+        AppsData(R.string.counter,R.drawable.counter)
     )
 
