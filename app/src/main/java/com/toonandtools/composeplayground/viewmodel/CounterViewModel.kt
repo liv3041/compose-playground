@@ -12,18 +12,20 @@ class CounterViewModel: ViewModel() {
 
     fun increment(){
         _count.update{currentState->
-            currentState.copy(count = _count.value.count + 1)
+            currentState.copy(count = currentState.count + 1)
         }
 
     }
 
     fun decrement(){
         _count.update{currentState->
-            currentState.copy(count = _count.value.count - 1)
-        }     }
+            currentState.copy(count = currentState.count - 1)
+        }
+    }
 
     fun reset(){
         _count.update{currentState->
             currentState.copy(count = 0)
-        }     }
+        }
+    }
 }
