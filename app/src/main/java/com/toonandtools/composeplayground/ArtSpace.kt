@@ -1,19 +1,24 @@
 package com.toonandtools.composeplayground
 
+import android.app.Activity
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.LocalActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -25,6 +30,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.toonandtools.composeplayground.ui.theme.ComposePlaygroundTheme
 
 class ArtSpace : ComponentActivity() {
@@ -33,7 +40,8 @@ class ArtSpace : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             ComposePlaygroundTheme {
-                    SpaceCreation()
+                val navController = rememberNavController()
+                SpaceCreation(navController = navController)
             }
         }
     }
@@ -41,7 +49,7 @@ class ArtSpace : ComponentActivity() {
 
 
 @Composable
-fun SpaceCreation( ) {
+fun SpaceCreation(navController: NavController) {
 
     val data = listOf(
         Triple("Floating Balloon in the Sky","Bubbly Balloon", R.drawable.hot_air_balloon),
@@ -51,6 +59,9 @@ fun SpaceCreation( ) {
 
     // Mutable state to track the current index
     var currentIndex by remember { mutableStateOf(0) }
+    val activity = LocalActivity.current as Activity
+
+
    Column(
        horizontalAlignment = Alignment.CenterHorizontally,
        verticalArrangement = Arrangement.Center,
@@ -59,6 +70,15 @@ fun SpaceCreation( ) {
            .fillMaxSize()
 
    ) {
+       Icon(
+           imageVector = Icons.Default.ArrowBack,
+           contentDescription = "Back",
+           modifier = Modifier.padding(16.dp)
+               .align(Alignment.Start)
+               .clickable{
+                   navController.popBackStack()
+               }
+       )
        Image(painter = painterResource(data[currentIndex].third),
            contentDescription = "${data[currentIndex].first} + Image" ,
            modifier = Modifier.padding(50.dp))
@@ -99,6 +119,6 @@ fun SpaceCreation( ) {
 @Composable
 fun ArtSpacePreview() {
     ComposePlaygroundTheme {
-      SpaceCreation()
+      SpaceCreation(navController = rememberNavController())
     }
 }
